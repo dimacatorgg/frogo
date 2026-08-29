@@ -315,7 +315,7 @@ async function getdata(latitude, longitude) {
     }
 
     const frogResponse = await axios.post(
-      'http://localhost:8000/frog',
+      'https://frogoback.onrender.com/frog',
       weatherData
     )
 
@@ -485,7 +485,7 @@ btn2.forEach((item) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/occ",
+        "https://frogoback.onrender.com/occ",
         {
           lat: points.value[index].lat,
           lon: points.value[index].lon,
