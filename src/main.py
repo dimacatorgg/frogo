@@ -19,9 +19,9 @@ class MLP(nn.Module):
         super().__init__()
 
         self.net = nn.Sequential(
-            nn.Linear(6, 3),
-            nn.ReLU(),
-            nn.Linear(3, 6)
+            nn.Linear(4, 2),
+      
+            nn.Linear(2, 4)
         )
 
     def forward(self, x):
@@ -45,8 +45,8 @@ class Item(BaseModel):
     vpd: float
     tmin: float
     tmax: float
-    ws: float
-    ppt: float
+   # ws: float
+   # ppt: float
 
 
 class Item2(BaseModel):
@@ -89,19 +89,19 @@ def get_frogs(item: Item):
             item.vpd,
             item.tmin,
             item.tmax,
-            item.ws,
-            item.ppt
+           # item.ws,
+          #  item.ppt
         ],
         dtype=torch.float32
     )
 
-    # Dodaj batch dimension
+    
     X = X.unsqueeze(0)
 
     with torch.no_grad():
         prediction = model(X)
 
-    # Reconstruction error
+   
     error = torch.norm(
         prediction - X,
         p=2,
@@ -115,9 +115,10 @@ def get_frogs(item: Item):
     # Zaštita od deljenja nulom
     score = min(
         0.9,
-        208 / max(error.item(), 1e-8)
+        4 / max(error.item(), 1e-8)
     )
-
+    print(f"vecotr is {X}")
+    print(4/error.item())
     return {
         "frog": frog,
         "score": float(score),
