@@ -107,7 +107,7 @@ def get_frogs(item: Item):
         p=2,
         dim=1
     )
-
+#adadwadawdadadawdw
     threshold = 208 + 73 * 3
 
     frog = error.item() < threshold
