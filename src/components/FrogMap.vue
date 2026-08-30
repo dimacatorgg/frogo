@@ -319,7 +319,7 @@ async function getdata(latitude, longitude) {
       weatherData
     )
     console.log("It works")
-    return frogResponse.data
+    return [frogResponse.data,weatherData]
 
   } catch (err) {
     console.log('Open-Meteo / FastAPI error:', err)
@@ -484,12 +484,20 @@ btn2.forEach((item) => {
     const activity = target.getAttribute("seen");
 if(activity){
   try {
+    const weather = points.value[index]
+   console.log(weather)
       const response = await axios.post(
         "https://frogoback.onrender.com/occ",
         {
           lat: points.value[index].lat,
           lon: points.value[index].lon,
-          occ: Number(activity)
+          occ: Number(activity),
+          srad:weather.srad,
+          vpd:weather.vpd,
+          tmin:weather.tmin,
+          tmax:weather.tmax,
+          ws:weather.ws,
+          ppt:weather.ppt,
         }
       );
 
@@ -552,7 +560,7 @@ async function addPoint(latitude, longitude) {
   lon.value = longitude
 
   /* Get frog prediction */
-  const result = await getdata(
+  const [result,weather] = await getdata(
     latitude,
     longitude
   )
@@ -582,7 +590,14 @@ async function addPoint(latitude, longitude) {
   points.value.push({
     lat: latitude,
     lon: longitude,
-    score: score
+    score: score,
+    srad:weather.srad,
+    vpd:weather.vpd,
+    tmin:weather.tmin,
+    tmax:weather.tmax,
+    ws:weather.ws,
+    ppt:weather.ppt,
+
   })
 
   const pointIndex = points.value.length - 1
