@@ -473,7 +473,7 @@ function sent(s){
   if (!popupEl) {
   return;
 }
-
+const btn = popupEl.querySelector(".bo")
 const btn2 = popupEl.querySelectorAll("span");
 
 btn2.forEach((item) => {
@@ -482,8 +482,8 @@ btn2.forEach((item) => {
 
     const index = target.getAttribute("index");
     const activity = target.getAttribute("seen");
-
-    try {
+if(activity){
+  try {
       const response = await axios.post(
         "https://frogoback.onrender.com/occ",
         {
@@ -498,6 +498,14 @@ btn2.forEach((item) => {
     } catch (err) {
       console.error("Greška pri slanju:", err);
     }
+}else{
+const markerIndex = markers.value.indexOf(marker)
+
+      if (markerIndex !== -1) {
+        cls(markerIndex)
+      }
+}
+   
   });
 });
 
