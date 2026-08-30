@@ -318,7 +318,7 @@ async function getdata(latitude, longitude) {
       'https://frogoback.onrender.com/frog',
       weatherData
     )
-
+    console.log("It works")
     return frogResponse.data
 
   } catch (err) {
