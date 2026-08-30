@@ -494,7 +494,7 @@ if(activity){
       );
 
       console.log(response.data);
-      alert("Poslato!");
+      alert("Sent!");
     } catch (err) {
       console.error("Greška pri slanju:", err);
     }
